@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/browser_icon.png">
+  <link rel="icon" type="image/png" href="/img/browser_icon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#87CEEB">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>VScode编辑器快捷输入 - Jacob&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/display.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Jacob's Blog" type="application/atom+xml">
+</head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <script>
+    (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+    window.SeniverseWeatherWidget('show', {
+      flavor: "bubble",
+      location: "WX4FBXXFKE4F",
+      geolocation: true,
+      language: "zh-Hans",
+      unit: "c",
+      theme: "auto",
+      token: "e3bd2747-f06e-4c85-a3c2-7fa21333abee",
+      hover: "enabled",
+      container: "tp-weather-widget"
+    })
+  </script>
+  <div class="container">
+
+    <div id="tp-weather-widget" style="color: white !important;"></div> <!-- 天气插件 -->
+
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jacob's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_blank">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_blank">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_blank">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_blank">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_blank">
+                <i class="iconfont icon-user-fill"></i>
+                关于我
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_blank">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/4.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="VScode编辑器快捷输入">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-30 10:16" pubdate>
+        2021年1月30日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">VScode编辑器快捷输入</h1>
+            
+            <div class="markdown-body">
+              <h2 id="VSCode编辑器使用技巧：快捷输入HTML代码"><a href="#VSCode编辑器使用技巧：快捷输入HTML代码" class="headerlink" title="VSCode编辑器使用技巧：快捷输入HTML代码"></a>VSCode编辑器使用技巧：快捷输入HTML代码</h2><p>VSCode中有一些快捷编辑HTML的方法，能大大提高工作效率，在这记录一些。</p>
+<p>1.输入html:5,然后回车—&gt;生成页面模板</p>
+<p> 2.输入！回车 –&gt;快速生成页面代码</p>
+<p> 3.输 入link:css 回车 –&gt;引入css样式文件，输入scrip:src引入js</p>
+<p> 4.输入标签名按tab或者回车自动补齐 ，输入h2{文本} –&gt;&lt;h2&gt;文本&lt;h2&gt;</p>
+<h3 id="（一）主命令框"><a href="#（一）主命令框" class="headerlink" title="（一）主命令框"></a>（一）主命令框</h3><p>F1或 Ctrl+Shift+P: 打开命令面板。在打开的输入框内，可以输入任何命令，例如：按一下Backspace会进入到 Ctrl+P模式</p>
+<p>在Ctrl+P下输入&gt;可以进入Ctrl+Shift+P模式</p>
+<p>在 Ctrl+P窗口下还可以:<br> 直接输入文件名，跳转到文件<br> ?列出当前可执行的动作<br> !显示 Errors或 Warnings，也可以Ctrl+Shift+M<br> :跳转到行数，也可以 Ctrl+G直接进入<br> @跳转到symbol（搜索变量或者函数），也可以 Ctrl+Shift+O直接进入<br> @根据分类跳转symbol，查找属性或函数，也可以 Ctrl+Shift+O后输入:进入</p>
+<p>根据名字查找 symbol，也可以 Ctrl+T</p>
+<h3 id="（二）常用快捷键"><a href="#（二）常用快捷键" class="headerlink" title="（二）常用快捷键"></a>（二）常用快捷键</h3><p>说明  快捷键<br> 打开一个新窗口：    Ctrl+Shift+N<br> 关闭窗口：   Ctrl+Shift+W<br> 同时打开多个编辑器（查看多个文件）<br> 切出一个新的编辑器（最多 3 个）   Ctrl+\，也可以按住 Ctrl 鼠标点击 Explorer 里的文件名<br> 左中右 3 个编辑器的快捷键  Ctrl+1 Ctrl+2 Ctrl+3<br> 编辑器换位置  Ctrl+k然后按 Left或 Right<br> 文件之间切换  Ctrl+Tab<br> 打开集成终端  Ctrl+`</p>
+<h3 id="（三）代码编辑"><a href="#（三）代码编辑" class="headerlink" title="（三）代码编辑"></a>（三）代码编辑</h3><h5 id="1-格式调整"><a href="#1-格式调整" class="headerlink" title="1.格式调整"></a>1.格式调整</h5><p>注意： 对python文件进行代码格式化操作时，会提示安装autopep8</p>
+<p>代码格式化： Shift+Alt+F，或 Ctrl+Shift+P 后输入 format code<br> 代码行缩进: Ctrl+[ 、 Ctrl+]<br> 在当前行下边插入一行 Ctrl+Enter<br> 在当前行上方插入一行 Ctrl+Shift+Enter<br> 上下移动一行： Alt+Up 或 Alt+Down<br> 向上向下复制一行： Shift+Alt+Up 或 Shift+Alt+Down</p>
+<h5 id="2-光标相关"><a href="#2-光标相关" class="headerlink" title="2.光标相关"></a>2.光标相关</h5><p>移动到定义处： F12<br> 定义处缩略图：只看一眼而不跳转过去:Alt+F12<br> 移动到文件结尾： Ctrl+End<br> 移动到文件开头： Ctrl+Home<br> 跳转到光标上一次(下一次)位置（误操作的回退方案，非常有用）ctrl + Left / Ctrl + Right<br> 注意： 下面两个功能和alt+↑/↓配合，很方便的移动代码块：</p>
+<p>选择从光标到行尾：Shift+End<br> 选择从行首到光标处：Shift+Home<br> 注意： 这两个功能很爽，可以同时编辑一些变量名：</p>
+<p>多行编辑(列编辑)：Ctrl+Alt+Down/Up或者Alt+Shift+鼠标左键，可以批量选中文本并编辑<br> 同时选中所有匹配： Ctrl+Shift+L<br> Ctrl+D 下一个匹配的也被选中 (在 sublime 中是删除当前行，后面自定义快键键中，设置与 Ctrl+Shift+K 互换了)<br> 回退上一个光标操作： Ctrl+U<br> 删除光标右侧的所有字： Ctrl+Delete<br> 扩展/缩小选取范围： Shift+Alt+Left 和 Shift+Alt+Right<br> 多光标选取Alt + 鼠标单击<br> 逐步选中其它相同的symbol Ctrl + D(已更改快捷方式为：Ctrl+Shift+K)<br> 全选相同symbolCtrl + F12<br> 重构（重命名）Symbol F2<br> 查找所有引用了选中symbol的代码 Shift + F12<br> 跳转到symbol的定义处 F12<br> 瞥见下symbol的定义出（在该symbol下方展开面板，显示定义处代码，非常有用）Alt + F12</p>
+<h5 id="3-重构代码"><a href="#3-重构代码" class="headerlink" title="3.重构代码"></a>3.重构代码</h5><p>注意： 查看函数引用和批量休修改函数名，好用：</p>
+<p>重命名：比如要修改一个方法名，可以选中后按 F2，输入新的名字，回车，会发现所有的文件都修改了<br> 找到所有的引用： Shift+F12<br> 同时修改本文件中所有匹配的： Ctrl+F12<br> 跳转到下一个 Error 或 Warning：当有多个错误时可以按 F8逐个跳转<br> 查看 diff： 在 explorer 里选择文件右键 Set file to compare，然后需要对比的文件上右键选择 Compare with file_name_you_chose</p>
+<h5 id="4-查找替换"><a href="#4-查找替换" class="headerlink" title="4.查找替换"></a>4.查找替换</h5><p>查找:Ctrl+F<br> 查找替换:Ctrl+H<br> 整个文件夹中查找:Ctrl+Shift+F</p>
+<h5 id="5-显示相关"><a href="#5-显示相关" class="headerlink" title="5.显示相关"></a>5.显示相关</h5><p>全屏：F11<br> 区域整块放大/缩小：Ctrl +/-<br> 侧边栏显/隐：Ctrl+B<br> 显示资源管理器:Ctrl+Shift+E<br> 显示搜索:Ctrl+Shift+F<br> 显示 Git:Ctrl+Shift+G<br> 显示 Debug:Ctrl+Shift+D<br> 显示 Output:Ctrl+Shift+U</p>
+<h5 id="6-其他"><a href="#6-其他" class="headerlink" title="6.其他"></a>6.其他</h5><p>文件自动保存设置：File -&gt; AutoSave ，或者 Ctrl+Shift+P，输入 auto</p>
+<h3 id="（四）修改默认快捷键"><a href="#（四）修改默认快捷键" class="headerlink" title="（四）修改默认快捷键"></a>（四）修改默认快捷键</h3><p>打开默认键盘快捷方式设置：<br> File（文件） -&gt; Preferences（首选项） -&gt; Keyboard Shortcuts（键盘快捷方式），或者：Alt+F -&gt;p-&gt; k-&gt; 回车。</p>
+<p>修改keybindings.json：(这个是当时自己添加的)</p>
+<p>// ctrl+d 删除一行<br> {<br> “key”: “ctrl+d”,<br> “command”: “editor.action.deleteLines”,<br> “when”: “editorTextFocus”<br> },<br> // 与删除一行的快捷键互换<br> {<br> “key”: “ctrl+shift+k”,<br> “command”: “editor.action.addSelectionToNextFindMatch”,<br> “when”: “editorFocus”<br> },<br> // ctrl+shift+/多行注释<br> {<br> “key”:”ctrl+shift+/“,<br> “command”: “editor.action.blockComment”,<br> “when”: “editorTextFocus”<br> },</p>
+<h3 id="（五）推荐插件"><a href="#（五）推荐插件" class="headerlink" title="（五）推荐插件"></a>（五）推荐插件</h3><h5 id="1-前端插件"><a href="#1-前端插件" class="headerlink" title="1.前端插件"></a>1.前端插件</h5><p>auto close tag 自动关闭HTML标签<br> Auto Rename Tag：自动修改标签<br> AutoFileNmae:auto complete file name，自动补全文件的名字<br> Beautify:显示js/json/css美化，按F1<br> Bracket Pair Colorizer 标记显示不同颜色的关联括号<br> Color Info 显示颜色信息<br> CSS Formatter css格式化工具<br> Debugger for Chrome 谷歌调试工具（需要配置launch.json）<br> Document This 添加备注信息（only supports JavaScript and TypeScript）Ctrl+Alt+D and again Ctrl+Alt+D<br> filesize 文件大小提示<br> GitLens 提示文件修改信息，具体到代码行<br> Guides:显示代码对其辅助线<br> HTML CSS Support css文件支持HTML标签提示<br> HTML Preview 预览编译HTML文件<br> HTML SCSS Support scss文件支持HTML标签提示<br> HTML Snippets 支持HTML标签提示<br> HTMLHint<br> intellisense for css class names in html 支持HTML文件中类名提示<br> JavaScript (ES6) snippets<br> jQuery Code Snippets<br> JS, CSS, HTML Formatting<br> Live HTML Previewer<br> markdownlint<br> Npm Intellisense<br> Path Intellisense: 路径匹配<br> Path Autocomplete<br> Vetur：VUE扩展<br> PostCSS Sorting<br> stylelint<br> stylefmt<br> ESLint<br> javascript standard format<br> Babel ES6/ES7<br> Add jsdoc comments<br> vue<br> weex<br> Reactjs code snippets<br> React Native Tools<br> Instant Markdown<br> Markdown Shortcuts<br> TextTransform<br> Color Highlight:写csss时，颜色值会增加对应的颜色背景显示<br> open in browser: alt+b选择浏览器预览文件<br> Rainbow Brackets：有颜色的显示括号匹配<br> Settings Sync: 同步配置（需要配置GitHub的本地token key）</p>
+<p>注： 切换主题的快捷键：f1 或ctrl+shift+p输入theme 回车,上下切换：ctrl+k,ctrl+t。</p>
+<ul>
+<li>One Dark Pro</li>
+<li>Atom One Dark</li>
+<li>FlatUI</li>
+<li>Material Icon Theme: 图标主题</li>
+<li>vscode-icons</li>
+<li>VSCode Great Icons</li>
+<li>Dracula Official：主题，推荐</li>
+</ul>
+<hr>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8df09959f5e4">https://www.jianshu.com/p/8df09959f5e4</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/VScode/">VScode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/VScode/">VScode</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/01/2021-2-1-%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E9%93%BE%E6%8E%A5%E6%97%A0%E6%B3%95%E5%9C%A8%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决hexo博客链接无法在新标签页打开问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/29/2021-1-29-markdown%E7%BC%96%E5%86%99%E8%8C%83%E4%BE%8B/">
+                        <span class="hidden-mobile">markdown编写范例</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "c8vx1DGGAbBE7yimdONpYNCh-gzGzoHsz",
+          app_key: "tvuUbI0R0EDj6YTp3j4EgK5W",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <a target="_blank" rel="noopener" href="https://www.bilibili.com/bangumi/play/ep34489"><img src="/img/logo_danko.png" srcset="/img/loading.gif"></img></a> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UVa -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  
+
+
+  
+
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <!-- // 这里div的样式是笔者自己修改过的，你可以直接使用APlayer官方的原配置：<div id="aplayer"></div> -->
+    <div id="aplayer-uxAIfEUs" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="7877855078" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="metadata" data-theme="#3F51B5" data-volume=1 data-fixed="true" data-mini="true"></div>
+    
+    <script> //运行时间
+      function secondToDate(second) {
+          if (!second) {
+              return 0;
+          }
+          var time = new Array(0, 0, 0, 0, 0);
+          if (second >= 365 * 24 * 3600) {
+              time[0] = parseInt(second / (365 * 24 * 3600));
+              second %= 365 * 24 * 3600;
+          }
+          if (second >= 24 * 3600) {
+              time[1] = parseInt(second / (24 * 3600));
+              second %= 24 * 3600;
+          }
+          if (second >= 3600) {
+              time[2] = parseInt(second / 3600);
+              second %= 3600;
+          }
+          if (second >= 60) {
+              time[3] = parseInt(second / 60);
+              second %= 60;
+          }
+          if (second > 0) {
+              time[4] = second;
+          }
+          return time;
+      }
+      </script>
+  <script type="text/javascript" language="javascript">
+      function setTime() {
+          var create_time = Math.round(new Date(Date.UTC(2021, 01, 04, 00, 00, 00)).getTime() / 1000);
+          var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+          currentTime = secondToDate((timestamp - create_time));
+          currentTimeHtml = 'Jacob\'s博客已经运行了：' + currentTime[0] + '年 ' + currentTime[1] + '天 '
+                  + currentTime[2] + '时 ' + currentTime[3] + '分 ' + currentTime[4]
+                  + '秒';
+          document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+      }    setInterval(setTime, 1000);
+  </script>
+
+  <span id="htmer_time" />
+
+
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+
+  <!-- 爆炸红心效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/firework.js"></script>
+
+
+</body>
+</html>

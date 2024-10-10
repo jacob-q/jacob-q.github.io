@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/browser_icon.png">
+  <link rel="icon" type="image/png" href="/img/browser_icon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#87CEEB">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>贴一个认知实习写的python爬虫 - Jacob&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/display.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Jacob's Blog" type="application/atom+xml">
+</head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <script>
+    (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+    window.SeniverseWeatherWidget('show', {
+      flavor: "bubble",
+      location: "WX4FBXXFKE4F",
+      geolocation: true,
+      language: "zh-Hans",
+      unit: "c",
+      theme: "auto",
+      token: "e3bd2747-f06e-4c85-a3c2-7fa21333abee",
+      hover: "enabled",
+      container: "tp-weather-widget"
+    })
+  </script>
+  <div class="container">
+
+    <div id="tp-weather-widget" style="color: white !important;"></div> <!-- 天气插件 -->
+
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jacob's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_blank">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_blank">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_blank">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_blank">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_blank">
+                <i class="iconfont icon-user-fill"></i>
+                关于我
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_blank">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/4.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="贴一个认知实习写的python爬虫">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-27 16:08" pubdate>
+        2021年1月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">贴一个认知实习写的python爬虫</h1>
+            
+            <div class="markdown-body">
+              <p>实习大作业制作了爬取bangumi动画排行网站的前100名动画排名及评分等数据，通过动画的评分和年份等数据，分析不同年代用户的喜好，以及不同年代高分动画的占比并将其保存至表格并制作了图表。程序分为爬虫本体和可视化程序。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="数据源于2020/6/28
+">[1]</span></a></sup></p>
+<h3 id="爬虫本体"><a href="#爬虫本体" class="headerlink" title="爬虫本体"></a>爬虫本体</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getHTMLText</span>(<span class="hljs-params">url</span>):</span><br>    headers=&#123;<span class="hljs-string">&quot;Accept&quot;</span>:<span class="hljs-string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;</span>,<br>             <span class="hljs-string">&quot;User-Agent&quot;</span>:<span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&quot;</span>,<br>             <span class="hljs-string">&quot;Cookie&quot;</span>:<span class="hljs-string">&quot;chii_theme=light; chii_sid=juvruV; __utmc=1; __utmz=1.1593152733.8.6.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utma=1.673048667.1582112818.1593152733.1593156335.9; __utmt=1; __utmb=1.1.10.1593156335&quot;</span>&#125;<br>    <span class="hljs-keyword">try</span>:<br>        r = requests.get(url,headers=headers,timeout=<span class="hljs-number">30</span>)<br>        r.raise_for_status()<br>        r.encoding = r.apparent_encoding<br>        <span class="hljs-keyword">return</span> r.text<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span> <br></code></pre></td></tr></table></figure>
+<p>第一个函数getInfo我使用了request.get方法，headers选择了Mozilla/5.0以便成功爬取网站。爬取内容函数采用try-except结构，try里边采用raise_for_status，若返回值不为200将返回空值，避免程序报错。返回值r.text包含网页全部内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parsePage</span>(<span class="hljs-params">List1, List2, html</span>):</span><br>    <span class="hljs-keyword">try</span>:<br>        rank_tag=<span class="hljs-string">r&#x27;&lt;span class=\&quot;rank\&quot;&gt;(.*?)&lt;/span&gt;&#x27;</span><br>        rank_find=re.findall(rank_tag, html, re.S|re.M)  <br>        CHNname_tag=<span class="hljs-string">r&#x27;&lt;a href=\&quot;/subject/\d&#123;,6&#125;\&quot; class=\&quot;l\&quot;&gt;(.*?)&lt;/a&gt;&#x27;</span>  <br>        CHNname_find=re.findall(CHNname_tag, html, re.S|re.M)<br>        score_tag=<span class="hljs-string">r&#x27;&lt;small class=\&quot;fade\&quot;&gt;(.*?)&lt;/small&gt;&#x27;</span><br>        score_find=re.findall(score_tag, html, re.S|re.M)<br>        scoreNum_tag=<span class="hljs-string">r&#x27;&lt;span class=\&quot;tip_j\&quot;&gt;(.*?)&lt;/span&gt;&#x27;</span> <br>        scoreNum_find=re.findall(scoreNum_tag, html, re.S|re.M)<br>        info_tag=<span class="hljs-string">r&#x27;&lt;p class=\&quot;info tip\&quot;&gt;(.*?)&lt;/p&gt;&#x27;</span> <br>        info_find=re.findall(info_tag, html, re.S|re.M)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(CHNname_find)):<br>            rank=rank_find[i].strip(<span class="hljs-string">&#x27;&lt;small&gt;Rank &lt;/small&gt;&#x27;</span>)<br>            <span class="hljs-keyword">if</span>(rank==<span class="hljs-string">&quot;101&quot;</span>):<br>                <span class="hljs-keyword">break</span><br>            CHNname= CHNname_find[i].strip()<br>            score=score_find[i].strip()<br>            scoreNum=scoreNum_find[i].strip(<span class="hljs-string">&#x27;(,)&#x27;</span>)<br>            info=info_find[i].strip()<br>            <span class="hljs-keyword">if</span>(rank==<span class="hljs-string">&quot;37&quot;</span> <span class="hljs-keyword">or</span> rank==<span class="hljs-string">&quot;91&quot;</span>):<br>                a=info[:<span class="hljs-number">4</span>]<br>            <span class="hljs-keyword">else</span>:<br>                a=info[<span class="hljs-number">5</span>:<span class="hljs-number">19</span>]<br>                a=a.strip(<span class="hljs-string">&#x27;/ &#x27;</span>)<br>                a=a[:<span class="hljs-number">4</span>]<br>            List1.append([rank,CHNname,score,scoreNum,info])<br>            List2.append([rank,CHNname,a,score,scoreNum.strip(<span class="hljs-string">&#x27;人评分&#x27;</span>)])<br>    <span class="hljs-keyword">except</span>:<br>        print(<span class="hljs-string">&quot;&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>第二个函数selectInfo同样采用try-except结构，我使用了正则表达式方法筛选内容，共筛选排名、中文名、评分、评分人数、集数/上映日期/主要制片人五个内容。之后使用for循环将每个内容经过修饰后添加进参数列表中，成功获取全部所需爬取内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printList</span>(<span class="hljs-params">List</span>):</span><br>    tplt = <span class="hljs-string">&quot;&#123;0:^4&#125;\t&#123;1:25&#125;\t&#123;2:4&#125;\t&#123;3:&#123;5&#125;&gt;10&#125;\t&#123;4:&#123;5&#125;&lt;30&#125;&quot;</span><br>    print(tplt.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;排名&quot;</span>, <span class="hljs-string">&quot;中文名&quot;</span>,<span class="hljs-string">&quot;评分&quot;</span>,<span class="hljs-string">&quot;评分人数&quot;</span>,<span class="hljs-string">&quot;集数/上映日期/主要制片人&quot;</span>,<span class="hljs-built_in">chr</span>(<span class="hljs-number">12288</span>)))<br>    <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> List:<br>        print(tplt.<span class="hljs-built_in">format</span>(g[<span class="hljs-number">0</span>], g[<span class="hljs-number">1</span>], g[<span class="hljs-number">2</span>], g[<span class="hljs-number">3</span>], g[<span class="hljs-number">4</span>],<span class="hljs-built_in">chr</span>(<span class="hljs-number">12288</span>)))<br></code></pre></td></tr></table></figure>
+<p>第三个函数printList用于输出全部内容，采用format方法为内容排列格式，定义tplt变量存取每列数据宽度，其中中文空格符号采用chr(12288)来表示，用于防止文字不齐。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">writeInList</span>(<span class="hljs-params">List1,List2</span>):</span><br>    headers1 = [<span class="hljs-string">&quot;排名&quot;</span>, <span class="hljs-string">&quot;中文名&quot;</span>,<span class="hljs-string">&quot;评分&quot;</span>,<span class="hljs-string">&quot;评分人数&quot;</span>,<span class="hljs-string">&quot;集数/上映日期/主要制片人&quot;</span>]<br>    f=pd.DataFrame(columns=headers1,data=List1)<br>    f.to_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\rankdata.csv&quot;</span>, index=<span class="hljs-literal">False</span>,encoding=<span class="hljs-string">&#x27;utf-8-sig&#x27;</span>)<br>    headers2 = [<span class="hljs-string">&quot;排名&quot;</span>, <span class="hljs-string">&quot;中文名&quot;</span>,<span class="hljs-string">&quot;年份&quot;</span>,<span class="hljs-string">&quot;评分&quot;</span>,<span class="hljs-string">&quot;评分人数&quot;</span>]<br>    f2=pd.DataFrame(columns=headers2,data=List2)<br>    f2.to_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\yeardata.csv&quot;</span>, index=<span class="hljs-literal">False</span>,encoding=<span class="hljs-string">&#x27;utf-8-sig&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>第四个函数writeInList向csv表格文件输入内容，采用pd.DataFrame和to_csv方法，成功获取csv数据文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    depth = <span class="hljs-number">5</span><br>    start_url = <span class="hljs-string">&#x27;https://bangumi.tv/anime/browser?sort=rank&#x27;</span><br>    rankList = []<br>    yearList=[]<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(depth):<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment">#print(&quot;test&quot;)</span><br>            url = start_url+ <span class="hljs-string">&#x27;&amp;page=&#x27;</span> + <span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)<br>            <span class="hljs-comment">#print(url)</span><br>            html = getHTMLText(url)<br>            parsePage(rankList,yearList, html)<br>        <span class="hljs-keyword">except</span>:<br>            <span class="hljs-keyword">continue</span><br>    printList(rankList)<br>    writeInList(rankList,yearList)<br>main()<br></code></pre></td></tr></table></figure>
+<p>第五个函数为main主函数，定义depth变量控制爬取页数，start_url存取所爬取网站，定义rankList和yearList两个表格分别用于存取完整全部数据和单独年份数据，rankList表用于观察，yearList表截取数据中的数字部分用于计算；</p>
+<p>输出excel表格效果如下：</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203406.png" srcset="/img/loading.gif" alt="微信截图_20200628195546"></p>
+<p align="center">图 1-rankdata表</p>
+
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203407.png" srcset="/img/loading.gif" alt="微信截图_20200628195623"></p>
+<p align="center">图 2-yeardata表</p>
+
+<p>采用for循环遍历五个网页，每一页网页网址后添加“&amp;page=”和页码即可实现翻译效果；采用try-except结构避免程序报错，最后调用printList和writeInList方法。至此爬取网页内容并筛选部分完成。</p>
+<h3 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib <span class="hljs-keyword">as</span> mpl<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">countavg</span>(<span class="hljs-params">firsty,secondy</span>):</span><br>    df=pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\yeardata.csv&quot;</span>)<br>    year=np.array([df[<span class="hljs-string">&#x27;年份&#x27;</span>].values,df[<span class="hljs-string">&#x27;评分人数&#x27;</span>].values])<br>    a=[]<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> np.where((year[<span class="hljs-number">0</span>]&lt;=secondy)&amp;(year[<span class="hljs-number">0</span>]&gt;firsty)):<br>        a=i<br>    total=<span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:<br>        total = total + year[<span class="hljs-number">1</span>][i]<br>    avgNum=<span class="hljs-built_in">int</span>(total/<span class="hljs-built_in">len</span>(a))<br>    <span class="hljs-keyword">return</span> avgNum<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">countScoreavg</span>(<span class="hljs-params">firsty,secondy</span>):</span><br>    df=pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\yeardata.csv&quot;</span>)<br>    year2=np.array([df[<span class="hljs-string">&#x27;年份&#x27;</span>].values,df[<span class="hljs-string">&#x27;评分&#x27;</span>].values])<br>    b=[]<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> np.where((year2[<span class="hljs-number">0</span>]&lt;=secondy)&amp;(year2[<span class="hljs-number">0</span>]&gt;firsty)):<br>        b=i<br>    total=<span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> b:<br>        total = total + year2[<span class="hljs-number">1</span>][i]<br>    avgNum=<span class="hljs-built_in">round</span>(total/<span class="hljs-built_in">len</span>(b),<span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">return</span> avgNum<br></code></pre></td></tr></table></figure>
+<p>第一个函数countavg用于计算平均评分人数，第二个函数countScoreavg用于计算平均分，供下面函数printNumberTable和printScoreTable使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumberTable</span>():</span><br>    num90=countavg(<span class="hljs-number">0</span>,<span class="hljs-number">1990</span>)<br>    num90_00=countavg(<span class="hljs-number">1990</span>,<span class="hljs-number">2000</span>)<br>    num00_10=countavg(<span class="hljs-number">2000</span>,<span class="hljs-number">2010</span>)<br>    num10=countavg(<span class="hljs-number">2010</span>,<span class="hljs-number">2021</span>)<br>    name_list = [<span class="hljs-string">&#x27;1990年前&#x27;</span>,<span class="hljs-string">&#x27;1990-2000年&#x27;</span>,<span class="hljs-string">&#x27;2000-2010年&#x27;</span>,<span class="hljs-string">&#x27;2010年至今&#x27;</span>]  <br>    num_list = [num90,num90_00,num00_10,num10]  <br>    plt.bar(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(num_list)), num_list,color=<span class="hljs-string">&#x27;rgby&#x27;</span>,tick_label = name_list)<br>    <span class="hljs-keyword">for</span> a,b <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(num_list)), num_list):<br>        plt.text(a, b+<span class="hljs-number">0.05</span>, b, ha=<span class="hljs-string">&#x27;center&#x27;</span>, va=<span class="hljs-string">&#x27;bottom&#x27;</span>, fontsize=<span class="hljs-number">10</span>)<br>    plt.title(<span class="hljs-string">&#x27;前100名各年代动画平均评分人数&#x27;</span>)<br>    plt.xlabel(<span class="hljs-string">&#x27;年代&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;人数&#x27;</span>)<br>    plt.show()<br></code></pre></td></tr></table></figure>
+<p>第三个函数printNumberTable输出各年代动画平均评分人数柱状图，柱状图输出采用plt.bar方法，采用plt.text装饰图形内容，之后定义标题和xy轴名称。</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203408.png" srcset="/img/loading.gif" alt="微信截图_20200628192634"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printScoreTable</span>():</span><br>    num90=countScoreavg(<span class="hljs-number">0</span>,<span class="hljs-number">1990</span>)<br>    num90_00=countScoreavg(<span class="hljs-number">1990</span>,<span class="hljs-number">2000</span>)<br>    num00_10=countScoreavg(<span class="hljs-number">2000</span>,<span class="hljs-number">2010</span>)<br>    num10=countScoreavg(<span class="hljs-number">2010</span>,<span class="hljs-number">2021</span>)<br>    name_list = [<span class="hljs-string">&#x27;1990年前&#x27;</span>,<span class="hljs-string">&#x27;1990-2000年&#x27;</span>,<span class="hljs-string">&#x27;2000-2010年&#x27;</span>,<span class="hljs-string">&#x27;2010年至今&#x27;</span>]  <br>    num_list = [num90,num90_00,num00_10,num10]  <br>    plt.bar(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(num_list)), num_list,color=<span class="hljs-string">&#x27;ybgr&#x27;</span>,tick_label = name_list)<br>    <span class="hljs-keyword">for</span> a,b <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(num_list)), num_list):<br>        plt.text(a, b+<span class="hljs-number">0.05</span>, b, ha=<span class="hljs-string">&#x27;center&#x27;</span>, va=<span class="hljs-string">&#x27;bottom&#x27;</span>, fontsize=<span class="hljs-number">10</span>)<br>    plt.title(<span class="hljs-string">&#x27;前100名各年代动画平均评分&#x27;</span>)<br>    plt.xlabel(<span class="hljs-string">&#x27;年代&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;平均分&#x27;</span>)<br>    plt.show()<br></code></pre></td></tr></table></figure>
+<p>第四个函数printScoreTable输出各年代动画平均分柱状图。</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203409.png" srcset="/img/loading.gif" alt="微信截图_20200628192644"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printPercent</span>():</span><br>    df=pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\yeardata.csv&quot;</span>)<br>    df.index = np.arange(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(df)+<span class="hljs-number">1</span>)<br>    mpl.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;Fangsong&#x27;</span>]<br>    li=np.array(df[<span class="hljs-string">&#x27;年份&#x27;</span>].values)<br>    l1=np.where((li&lt;=<span class="hljs-number">1990</span>))<br>    sum1=<span class="hljs-built_in">len</span>(l1[<span class="hljs-number">0</span>])<br>    l2=np.where((li&lt;=<span class="hljs-number">2000</span>)&amp;(li&gt;<span class="hljs-number">1990</span>))<br>    sum2=<span class="hljs-built_in">len</span>(l2[<span class="hljs-number">0</span>])<br>    l3=np.where((li&lt;=<span class="hljs-number">2010</span>)&amp;(li&gt;<span class="hljs-number">2000</span>))<br>    sum3=<span class="hljs-built_in">len</span>(l3[<span class="hljs-number">0</span>])<br>    l4=np.where((li&gt;<span class="hljs-number">2010</span>))<br>    sum4=<span class="hljs-built_in">len</span>(l4[<span class="hljs-number">0</span>])<br>    labels=<span class="hljs-string">&#x27;1990年前&#x27;</span>,<span class="hljs-string">&#x27;1990-2000年&#x27;</span>,<span class="hljs-string">&#x27;2000-2010年&#x27;</span>,<span class="hljs-string">&#x27;2010年至今&#x27;</span><br>    sizes = [sum1/(sum1+sum2+sum3+sum4),sum2/(sum1+sum2+sum3+sum4),sum3/(sum1+sum2+sum3+sum4),sum4/(sum1+sum2+sum3+sum4)]<br>    plt.pie(sizes,labels=labels,autopct=<span class="hljs-string">&#x27;%1.1f%%&#x27;</span>)<br>    plt.title(<span class="hljs-string">&quot;各年代动画占前100名比例&quot;</span>,fontproperties=<span class="hljs-string">&quot;SimHei&quot;</span>)<br>    plt.show()<br><br></code></pre></td></tr></table></figure>
+<p>第五个函数printPercent输出各年代动画占前100名比例饼图，采用np.where方法获取指定年份列表，采用plt.pie方法输出饼图。</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203410.png" srcset="/img/loading.gif" alt="微信截图_20200628192706"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printPercentTable</span>():</span><br>    df=pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\yeardata.csv&quot;</span>)<br>    df.index = np.arange(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(df)+<span class="hljs-number">1</span>)<br>    mpl.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;Fangsong&#x27;</span>]<br>    li=np.array(df[<span class="hljs-string">&#x27;年份&#x27;</span>].values)<br>    l1=np.where((li&lt;=<span class="hljs-number">1990</span>))<br>    sum1=<span class="hljs-built_in">len</span>(l1[<span class="hljs-number">0</span>])<br>    l2=np.where((li&lt;=<span class="hljs-number">2000</span>)&amp;(li&gt;<span class="hljs-number">1990</span>))<br>    sum2=<span class="hljs-built_in">len</span>(l2[<span class="hljs-number">0</span>])<br>    l3=np.where((li&lt;=<span class="hljs-number">2010</span>)&amp;(li&gt;<span class="hljs-number">2000</span>))<br>    sum3=<span class="hljs-built_in">len</span>(l3[<span class="hljs-number">0</span>])<br>    l4=np.where((li&gt;<span class="hljs-number">2010</span>))<br>    sum4=<span class="hljs-built_in">len</span>(l4[<span class="hljs-number">0</span>])<br>    sizes = [sum1/(sum1+sum2+sum3+sum4),sum2/(sum1+sum2+sum3+sum4),sum3/(sum1+sum2+sum3+sum4),sum4/(sum1+sum2+sum3+sum4)]<br>    name_list = [<span class="hljs-string">&#x27;1990年前&#x27;</span>,<span class="hljs-string">&#x27;1990-2000年&#x27;</span>,<span class="hljs-string">&#x27;2000-2010年&#x27;</span>,<span class="hljs-string">&#x27;2010年至今&#x27;</span>] <br>    plt.bar(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(sizes)), sizes,color=<span class="hljs-string">&#x27;rgby&#x27;</span>,tick_label = name_list)<br>    <span class="hljs-keyword">for</span> a,b <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(sizes)), sizes):<br>        plt.text(a, b+<span class="hljs-number">0.001</span>, <span class="hljs-built_in">str</span>(<span class="hljs-built_in">int</span>(b*<span class="hljs-number">100</span>))+<span class="hljs-string">&quot;%&quot;</span>, ha=<span class="hljs-string">&#x27;center&#x27;</span>, va=<span class="hljs-string">&#x27;bottom&#x27;</span>, fontsize=<span class="hljs-number">10</span>)<br>    plt.title(<span class="hljs-string">&#x27;各年代动画占前100名比例&#x27;</span>)<br>    plt.xlabel(<span class="hljs-string">&#x27;年代&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;比例&#x27;</span>)<br>    plt.show()<br></code></pre></td></tr></table></figure>
+<p>第六个函数printPercentTable输出各年代动画占前100名比例柱状图。</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203411.png" srcset="/img/loading.gif" alt="微信截图_20200628192712"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Mrecent100</span>():</span><br>    df=pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\yeardata.csv&quot;</span>)<br>    df.index = np.arange(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(df)+<span class="hljs-number">1</span>)<br>    year=np.array(df[<span class="hljs-string">&#x27;年份&#x27;</span>].values)<br>    df2=pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\rankdata.csv&quot;</span>)<br>    df2.index = np.arange(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(df)+<span class="hljs-number">1</span>)<br>    rank=np.array(df2[<span class="hljs-string">&#x27;排名&#x27;</span>].values)<br>    name=np.array(df2[<span class="hljs-string">&#x27;中文名&#x27;</span>].values)<br>    score=np.array(df2[<span class="hljs-string">&#x27;评分&#x27;</span>].values)<br>    recent=year[<span class="hljs-number">0</span>]<br>    recent_index=<span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">22</span>):<br>        a=year[i]<br>        <span class="hljs-keyword">if</span> a &gt; recent:<br>            recent=a<br>            recent_index=np.argwhere(year==a)<br>            b=recent_index[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]<br>    print(<span class="hljs-string">&quot;距今最近的进入前20名的动画为:&#123;0&#125;，年份:&#123;1&#125;，排名:&#123;2&#125;，得分:&#123;3&#125;&quot;</span>.<span class="hljs-built_in">format</span>(name[b],year[b],rank[b],score[b]))<br></code></pre></td></tr></table></figure>
+<p>第七个函数Mrecent20输出距今最近的进入前20名的动画，采用pd.read_csv分别读取yeardata和rankdata两个表格，获取该最大年份在yeardata表中索引位置后，在rankdata表获取该索引位置处数据并输出。</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210127203412.png" srcset="/img/loading.gif" alt="微信截图_20200628192812"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printList</span>():</span><br>    data_index = pd.read_csv(<span class="hljs-string">&quot;G:\XiaoxueqiData\\rankdata.csv&quot;</span>,encoding=<span class="hljs-string">&#x27;utf-8-sig&#x27;</span>)<br>    data_index = data_index.fillna(method=<span class="hljs-string">&quot;ffill&quot;</span>)  <span class="hljs-comment">#缺失值处理</span><br>    data_index.columns = [<span class="hljs-string">&quot;排名&quot;</span>,<span class="hljs-string">&quot;中文名&quot;</span>,<span class="hljs-string">&quot;评分&quot;</span>,<span class="hljs-string">&quot;评分人数&quot;</span>,<span class="hljs-string">&quot;集数/上映日期/主要制片人&quot;</span>]<br>    print(data_index)<br><br>printList()<br>printPercent()<br><span class="hljs-comment">#printPercentTable()</span><br><span class="hljs-comment">#printNumberTable()</span><br><span class="hljs-comment">#printScoreTable()</span><br>Mrecent100()<br></code></pre></td></tr></table></figure>
+<p>第八个函数printList输出rankdata csv文件的表格。  </p>
+<p>最后调用这几个函数输出图像和数据。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  通过此次爬取的数据分析，获取了各年代动画占前100名比例，其中2000-2010年代动画占比最大，为42%。说明这个时间段为动画的黄金年代，出品了最多的优质作品，1990年前占比最小为11%，说明这时候动画行业还在启蒙阶段，作品数不是很多；获取了各年代动画平均评分人数，其中同样是2000-2010年平均评分人数最多，为4699人，说明观众更关注这个年代的作品；获取了前100名各年代动画平均评分，各年代差距不大，均在8.5左右，说明在分数/质量上，各年代的作品都很优秀；获取了距今最近的进入前20名的动画为进击的巨人 第三季，是2019年的作品，评分8.7，排名第19，说明当代的作品还是能够和历史上的那些名作一较高下的。</p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>数据源于2020/6/28
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/29/2021-1-29-markdown%E7%BC%96%E5%86%99%E8%8C%83%E4%BE%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">markdown编写范例</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/04/test/">
+                        <span class="hidden-mobile">测试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "c8vx1DGGAbBE7yimdONpYNCh-gzGzoHsz",
+          app_key: "tvuUbI0R0EDj6YTp3j4EgK5W",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <a target="_blank" rel="noopener" href="https://www.bilibili.com/bangumi/play/ep34489"><img src="/img/logo_danko.png" srcset="/img/loading.gif"></img></a> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UVa -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  
+
+
+  
+
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <!-- // 这里div的样式是笔者自己修改过的，你可以直接使用APlayer官方的原配置：<div id="aplayer"></div> -->
+    <div id="aplayer-uxAIfEUs" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="7877855078" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="metadata" data-theme="#3F51B5" data-volume=1 data-fixed="true" data-mini="true"></div>
+    
+    <script> //运行时间
+      function secondToDate(second) {
+          if (!second) {
+              return 0;
+          }
+          var time = new Array(0, 0, 0, 0, 0);
+          if (second >= 365 * 24 * 3600) {
+              time[0] = parseInt(second / (365 * 24 * 3600));
+              second %= 365 * 24 * 3600;
+          }
+          if (second >= 24 * 3600) {
+              time[1] = parseInt(second / (24 * 3600));
+              second %= 24 * 3600;
+          }
+          if (second >= 3600) {
+              time[2] = parseInt(second / 3600);
+              second %= 3600;
+          }
+          if (second >= 60) {
+              time[3] = parseInt(second / 60);
+              second %= 60;
+          }
+          if (second > 0) {
+              time[4] = second;
+          }
+          return time;
+      }
+      </script>
+  <script type="text/javascript" language="javascript">
+      function setTime() {
+          var create_time = Math.round(new Date(Date.UTC(2021, 01, 04, 00, 00, 00)).getTime() / 1000);
+          var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+          currentTime = secondToDate((timestamp - create_time));
+          currentTimeHtml = 'Jacob\'s博客已经运行了：' + currentTime[0] + '年 ' + currentTime[1] + '天 '
+                  + currentTime[2] + '时 ' + currentTime[3] + '分 ' + currentTime[4]
+                  + '秒';
+          document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+      }    setInterval(setTime, 1000);
+  </script>
+
+  <span id="htmer_time" />
+
+
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+
+  <!-- 爆炸红心效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/firework.js"></script>
+
+
+</body>
+</html>

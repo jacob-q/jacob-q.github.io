@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/browser_icon.png">
+  <link rel="icon" type="image/png" href="/img/browser_icon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#87CEEB">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>hexo博客插入全局音乐播放器 - Jacob&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/display.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Jacob's Blog" type="application/atom+xml">
+</head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <script>
+    (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+    window.SeniverseWeatherWidget('show', {
+      flavor: "bubble",
+      location: "WX4FBXXFKE4F",
+      geolocation: true,
+      language: "zh-Hans",
+      unit: "c",
+      theme: "auto",
+      token: "e3bd2747-f06e-4c85-a3c2-7fa21333abee",
+      hover: "enabled",
+      container: "tp-weather-widget"
+    })
+  </script>
+  <div class="container">
+
+    <div id="tp-weather-widget" style="color: white !important;"></div> <!-- 天气插件 -->
+
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jacob's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_blank">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_blank">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_blank">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_blank">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_blank">
+                <i class="iconfont icon-user-fill"></i>
+                关于我
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_blank">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/4.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="hexo博客插入全局音乐播放器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-01 17:15" pubdate>
+        2021年2月1日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">hexo博客插入全局音乐播放器</h1>
+            
+            <div class="markdown-body">
+              <p> 起因想在博客插入音乐播放器，然鹅我用的fluid主题并不提供播放器插件教程，所以只能自己找方法插入播放器。</p>
+<p>在网上找到的几个方法：</p>
+<h4 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h4><p>根据aplayer的官方文档：<a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md</a></p>
+<p>单首音乐：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">&#123;% aplayer &quot;Caffeine&quot; &quot;Jeff Williams&quot; &quot;caffeine.mp3&quot; &quot;picture.jpg&quot; &quot;lrc:caffeine.txt&quot; %&#125;<br></code></pre></td></tr></table></figure>
+<p>多首：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs markdown">&#123;% aplayerlist %&#125;<br>&#123;<br><span class="hljs-code">    &quot;narrow&quot;: false,                          // （可选）播放器袖珍风格</span><br><span class="hljs-code">    &quot;autoplay&quot;: true,                         // （可选) 自动播放，移动端浏览器暂时不支持此功能</span><br><span class="hljs-code">    &quot;mode&quot;: &quot;random&quot;,                         // （可选）曲目循环类型，有 &#x27;random&#x27;（随机播放）, &#x27;single&#x27; (单曲播放), &#x27;circulation&#x27; (循环播放), &#x27;order&#x27; (列表播放)， 默认：&#x27;circulation&#x27; </span><br><span class="hljs-code">    &quot;showlrc&quot;: 3,                             // （可选）歌词显示配置项，可选项有：1,2,3</span><br><span class="hljs-code">    &quot;mutex&quot;: true,                            // （可选）该选项开启时，如果同页面有其他 aplayer 播放，该播放器会暂停</span><br><span class="hljs-code">    &quot;theme&quot;: &quot;#e6d0b2&quot;,	                      // （可选）播放器风格色彩设置，默认：#b7daff</span><br><span class="hljs-code">    &quot;preload&quot;: &quot;metadata&quot;,                    // （可选）音乐文件预载入模式，可选项： &#x27;none&#x27; &#x27;metadata&#x27; &#x27;auto&#x27;, 默认: &#x27;auto&#x27;</span><br><span class="hljs-code">    &quot;listmaxheight&quot;: &quot;513px&quot;,                 // (可选) 该播放列表的最大长度</span><br><span class="hljs-code">    &quot;music&quot;: [</span><br><span class="hljs-code">        &#123;</span><br><span class="hljs-code">            &quot;title&quot;: &quot;CoCo&quot;,</span><br><span class="hljs-code">            &quot;author&quot;: &quot;Jeff Williams&quot;,</span><br><span class="hljs-code">            &quot;url&quot;: &quot;caffeine.mp3&quot;,</span><br><span class="hljs-code">            &quot;pic&quot;: &quot;caffeine.jpeg&quot;,</span><br><span class="hljs-code">            &quot;lrc&quot;: &quot;caffeine.txt&quot;</span><br><span class="hljs-code">        &#125;,</span><br><span class="hljs-code">        &#123;</span><br><span class="hljs-code">            &quot;title&quot;: &quot;アイロニ&quot;,</span><br><span class="hljs-code">            &quot;author&quot;: &quot;鹿乃&quot;,</span><br><span class="hljs-code">            &quot;url&quot;: &quot;irony.mp3&quot;,</span><br><span class="hljs-code">            &quot;pic&quot;: &quot;irony.jpg&quot;</span><br><span class="hljs-code">        &#125;</span><br><span class="hljs-code">    ]</span><br><span class="hljs-code">&#125;</span><br><span class="hljs-code">&#123;% endaplayerlist %&#125;</span><br></code></pre></td></tr></table></figure>
+<p>使用qq或网易云等外链歌单：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; &quot;autoplay&quot; &quot;mutex:false&quot; &quot;listmaxheight:340px&quot; &quot;preload:none&quot; &quot;theme:#ad7a86&quot;%&#125;<br></code></pre></td></tr></table></figure>
+<p>还需编辑主题配置文件_config.yml，在文件末尾追加以下内容：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># aplayer</span><br>aplayer:  <br>  meting: true<br></code></pre></td></tr></table></figure>
+<p>缺点：markdown格式标签，只能在markdown文件中使用，而fluid主题使用jsp脚本生成主页，脚本文件格式为ejs，只有hexo new page自建网页能用markdown格式编写，无法实现全局播放，故舍弃。</p>
+<h4 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h4><p>在主题目录/layout/_partial/footer.ejs文件中（即页脚）直接插入html代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs html">&lt;% if(theme.aplayer.enable) &#123; %&gt;<br><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;</span>&gt;</span><br><span class="hljs-comment">&lt;!-- // 这里div的样式是笔者自己修改过的，你可以直接使用APlayer官方的原配置：&lt;div id=&quot;aplayer&quot;&gt;&lt;/div&gt; --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;aplayer&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position:absolute;left;0;bottom:0;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/color-thief-don@2.0.2/src/color-thief.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer(&#123;</span><br><span class="javascript">    container: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;aplayer&#x27;</span>),</span><br><span class="javascript">    autoplay: <span class="hljs-literal">false</span>, <span class="hljs-comment">//自动播放</span></span><br><span class="javascript">    listFolded: <span class="hljs-literal">true</span>, <span class="hljs-comment">//播放列表默认折叠</span></span><br><span class="javascript">    listMaxHeight: <span class="hljs-number">90</span>, <span class="hljs-comment">//播放列表最大高度</span></span><br><span class="javascript">    order: <span class="hljs-string">&#x27;list&#x27;</span>, <span class="hljs-comment">//音频循环顺序, 可选值: &#x27;list&#x27;, &#x27;random&#x27;</span></span><br><span class="javascript">    loop: <span class="hljs-string">&#x27;all&#x27;</span>, <span class="hljs-comment">//音频循环播放, 可选值: &#x27;all&#x27;, &#x27;one&#x27;, &#x27;none&#x27;</span></span><br><span class="javascript">    theme: <span class="hljs-string">&#x27;#e9e9e9&#x27;</span>, <span class="hljs-comment">//切换音频时的主题色，优先级低于audio.theme</span></span><br><span class="javascript">    preload: <span class="hljs-string">&#x27;none&#x27;</span>, <span class="hljs-comment">//音频预加载，可选值: &#x27;none&#x27;, &#x27;metadata&#x27;, &#x27;auto&#x27;</span></span><br><span class="javascript">    mutex: <span class="hljs-literal">true</span>, <span class="hljs-comment">//互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器</span></span><br><span class="javascript">    lrcType: <span class="hljs-number">3</span>, <span class="hljs-comment">//歌词格式，可选值：3（LRC文件歌词格式），1（JS字符串歌词格式）</span></span><br><span class="javascript">    volume: <span class="hljs-number">0.7</span>, <span class="hljs-comment">//默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效</span></span><br><span class="javascript">    fixed: <span class="hljs-literal">false</span>, <span class="hljs-comment">//吸底模式（fixed:true），迷你模式（mini:true），普通模式（注释此行或者设置fixed:false）</span></span><br>    audio: [&#123;<br><span class="javascript">        name: <span class="hljs-string">&#x27;平凡之路&#x27;</span>,</span><br><span class="javascript">        artist: <span class="hljs-string">&#x27;朴树&#x27;</span>,</span><br><span class="javascript">        lrc: <span class="hljs-string">&#x27;/downloads/lrc/平凡之路-朴树.lrc&#x27;</span>,</span><br><span class="javascript">        cover: <span class="hljs-string">&#x27;http://p2.music.126.net/W_5XiCv3rGS1-J7EXpHSCQ==/18885211718782327.jpg?param=300x300&#x27;</span>,</span><br><span class="javascript">        url: <span class="hljs-string">&#x27;http://fs.open.kugou.com/cd5cbe8edb012e4f77b0857cefc0956e/5c66accf/G097/M08/0A/1F/AYcBAFkQGpOAMUpuAEm-3SlWMyk951.mp3&#x27;</span></span><br>      &#125;,<br>      &#123;<br><span class="javascript">        name: <span class="hljs-string">&#x27;后会无期&#x27;</span>,</span><br><span class="javascript">        artist: <span class="hljs-string">&#x27;G.E.M.邓紫棋&#x27;</span>,</span><br><span class="javascript">        lrc: <span class="hljs-string">&#x27;/downloads/lrc/后会无期-G.E.M.邓紫棋.lrc&#x27;</span>,</span><br><span class="javascript">        cover: <span class="hljs-string">&#x27;http://p1.music.126.net/vpvPajo3kn88nHc7jUjeWQ==/5974746185758035.jpg?param=300x300&#x27;</span>,</span><br><span class="javascript">        url: <span class="hljs-string">&#x27;http://m10.music.126.net/20190215193113/e5afc8b5376136029366f2053cf30f85/ymusic/2c87/6ec3/582e/0d572dcc04f8de34133c0f364b74c30c.mp3&#x27;</span></span><br>      &#125;<br>    ]<br>  &#125;);<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>&lt;% &#125; %&gt;<br></code></pre></td></tr></table></figure>
+<p>还需编辑主题配置文件_config.yml，在文件末尾追加以下内容：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># aplayer</span><br>aplayer:  <br>  enable: true<br>  meting: true<br></code></pre></td></tr></table></figure>
+<p>缺点：需要逐个且手动敲代码设置播放列表里的音乐，无法灵活调整，且如果不上传至云盘的话，歌词和图片需要自行搜索下载下来使用本地地址，增加博客大小，故舍弃。</p>
+<h4 id="方法3："><a href="#方法3：" class="headerlink" title="方法3："></a>方法3：</h4><p>在找方法的时候发现的一个帖子：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43471926/article/details/109798928">https://blog.csdn.net/weixin_43471926/article/details/109798928</a>，</p>
+<p>其中有一段：其会被渲染为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;aplayer-uxAIfEUs&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;aplayer aplayer-tag-marker meting-tag-marker&quot;</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">&quot;000PeZCQ1i4XVs&quot;</span> <span class="hljs-attr">data-server</span>=<span class="hljs-string">&quot;tencent&quot;</span> <span class="hljs-attr">data-type</span>=<span class="hljs-string">&quot;artist&quot;</span> <span class="hljs-attr">data-mode</span>=<span class="hljs-string">&quot;circulation&quot;</span> <span class="hljs-attr">data-autoplay</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">data-mutex</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">data-listmaxheight</span>=<span class="hljs-string">&quot;340px&quot;</span> <span class="hljs-attr">data-preload</span>=<span class="hljs-string">&quot;auto&quot;</span> <span class="hljs-attr">data-theme</span>=<span class="hljs-string">&quot;#3F51B5&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>即方法1meting外链歌单markdown格式编译成html格式后的代码。</p>
+<p>结合方法1，2，既然方法2的原理是直接插入html代码，那可以尝试把其中播放器部分改为编译后meting代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html">&lt;% if(theme.aplayer.enable) &#123; %&gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- // 这里div的样式是笔者自己修改过的，你可以直接使用APlayer官方的原配置：&lt;div id=&quot;aplayer&quot;&gt;&lt;/div&gt; --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;aplayer-uxAIfEUs&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;aplayer aplayer-tag-marker meting-tag-marker&quot;</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">&quot;7877855078&quot;</span> <span class="hljs-attr">data-server</span>=<span class="hljs-string">&quot;tencent&quot;</span> <span class="hljs-attr">data-type</span>=<span class="hljs-string">&quot;playlist&quot;</span> <span class="hljs-attr">data-mode</span>=<span class="hljs-string">&quot;circulation&quot;</span> <span class="hljs-attr">data-autoplay</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">data-mutex</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">data-listmaxheight</span>=<span class="hljs-string">&quot;340px&quot;</span> <span class="hljs-attr">data-preload</span>=<span class="hljs-string">&quot;metadata&quot;</span> <span class="hljs-attr">data-theme</span>=<span class="hljs-string">&quot;#3F51B5&quot;</span> <span class="hljs-attr">data-volume</span>=<span class="hljs-string">1</span> <span class="hljs-attr">data-fixed</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">data-mini</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    &lt;% &#125; %&gt;<br></code></pre></td></tr></table></figure>
+<p>播放器选项格式为“data-xxxxxx=xxxxxx”，参考aplayer文档。</p>
+<p>最终效果：</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210201193005.png" srcset="/img/loading.gif" alt="QQ截图20210201180845"></p>
+<p>搭配上一篇在新标签页打开，可以实现后台播放音乐。</p>
+<h3 id="一些还没解决的问题："><a href="#一些还没解决的问题：" class="headerlink" title="一些还没解决的问题："></a>一些还没解决的问题：</h3><h5 id="1："><a href="#1：" class="headerlink" title="1："></a>1：</h5><h5 id=""><a href="#" class="headerlink" title=""></a><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210201193006.png" srcset="/img/loading.gif" alt="QQ截图20210201181340"></h5><p>每次加载都默认歌词打开，找了aplayer文档发现好像没有控制歌词默认开关标签。</p>
+<p>所以我的解决方法是。。。选一首纯音乐作为第一首歌，</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210201193007.png" srcset="/img/loading.gif" alt="QQ截图20210201181652"></p>
+<p>搭配歌词加载时的loading字样，本着又不是用不了原则，可以顺便把其当成播放器加载提示字幕，</p>
+<p><img src="https://jacob-q.oss-cn-beijing.aliyuncs.com/img/20210201193008.png" srcset="/img/loading.gif" alt="QQ截图20210201181812"></p>
+<h5 id="2："><a href="#2：" class="headerlink" title="2："></a>2：</h5><p>mutex防冲突只能在同一个页面生效，两个页面同时播放并不会强制暂停，所以我的解决方法是。。。手动暂停</p>
+<p>🙄</p>
+<hr>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43471926/article/details/109798928">https://blog.csdn.net/weixin_43471926/article/details/109798928</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27439819/article/details/105011943">https://blog.csdn.net/qq_27439819/article/details/105011943</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/hexo/">hexo</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/02/2021-2-2-HTML-iframe-%E6%A0%87%E7%AD%BE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Html-iframe-标签</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/01/2021-2-1-%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E9%93%BE%E6%8E%A5%E6%97%A0%E6%B3%95%E5%9C%A8%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">解决hexo博客链接无法在新标签页打开问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "c8vx1DGGAbBE7yimdONpYNCh-gzGzoHsz",
+          app_key: "tvuUbI0R0EDj6YTp3j4EgK5W",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <a target="_blank" rel="noopener" href="https://www.bilibili.com/bangumi/play/ep34489"><img src="/img/logo_danko.png" srcset="/img/loading.gif"></img></a> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UVa -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  
+
+
+  
+
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <!-- // 这里div的样式是笔者自己修改过的，你可以直接使用APlayer官方的原配置：<div id="aplayer"></div> -->
+    <div id="aplayer-uxAIfEUs" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="7877855078" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="metadata" data-theme="#3F51B5" data-volume=1 data-fixed="true" data-mini="true"></div>
+    
+    <script> //运行时间
+      function secondToDate(second) {
+          if (!second) {
+              return 0;
+          }
+          var time = new Array(0, 0, 0, 0, 0);
+          if (second >= 365 * 24 * 3600) {
+              time[0] = parseInt(second / (365 * 24 * 3600));
+              second %= 365 * 24 * 3600;
+          }
+          if (second >= 24 * 3600) {
+              time[1] = parseInt(second / (24 * 3600));
+              second %= 24 * 3600;
+          }
+          if (second >= 3600) {
+              time[2] = parseInt(second / 3600);
+              second %= 3600;
+          }
+          if (second >= 60) {
+              time[3] = parseInt(second / 60);
+              second %= 60;
+          }
+          if (second > 0) {
+              time[4] = second;
+          }
+          return time;
+      }
+      </script>
+  <script type="text/javascript" language="javascript">
+      function setTime() {
+          var create_time = Math.round(new Date(Date.UTC(2021, 01, 04, 00, 00, 00)).getTime() / 1000);
+          var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+          currentTime = secondToDate((timestamp - create_time));
+          currentTimeHtml = 'Jacob\'s博客已经运行了：' + currentTime[0] + '年 ' + currentTime[1] + '天 '
+                  + currentTime[2] + '时 ' + currentTime[3] + '分 ' + currentTime[4]
+                  + '秒';
+          document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+      }    setInterval(setTime, 1000);
+  </script>
+
+  <span id="htmer_time" />
+
+
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+
+  <!-- 爆炸红心效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/firework.js"></script>
+
+
+</body>
+</html>
